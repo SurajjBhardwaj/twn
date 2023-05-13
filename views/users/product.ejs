@@ -1,0 +1,162 @@
+
+<%- include('../layouts/header1.ejs') %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+    background-color: black;
+}
+
+form {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px green;
+  margin: 0 auto;
+  width: 500px;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+input[type="text"], input[type="file"] {
+  font-size: 18px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+   background-color: transparent;
+}
+
+input[type="text"]:focus, input[type="file"]:focus {
+  outline: none;
+  border-bottom: 2px solid #4CAF50;
+}
+
+/* for placeholders */
+::-webkit-input-placeholder {
+    color: #28b485;
+}
+
+:-moz-placeholder {
+    color: #28b485;
+}
+
+::-moz-placeholder {
+   color: #28b485;
+}
+
+:-ms-input-placeholder {
+    color: #28b485;
+}
+
+
+/* input[type="text"], input[type="file"] {
+  font-size: 18px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+} */
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  border: none;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+
+
+
+.header{
+   font-size: 48px;
+  font-weight: bold;
+  font-family:poppins;
+  text-align: center;
+  color: #28b485;
+  margin-top: 10px;
+  
+}
+
+
+</style>
+<body>
+    
+
+<div style="margin-bottom: 5rem;"margin-top:5rem >
+
+    <form action="/appendbook" method="post" enctype="multipart/form-data">
+        <h1 class="header">Add Books</h1><br>
+        <div>
+      
+          <input type="text" id="bookName" name="bookName" placeholder="Bookname">
+      
+          <br><br>
+      
+          <input type="text" id="title" name="tit" placeholder="Tittle">
+      
+          <br><br>
+      
+          <input type="text" id="about" name="about" placeholder="About">
+      
+          <br><br>
+      
+          <input type="text" id="authorName" name="authorName" placeholder="Author Name">
+          <br><br>
+      
+          <input type="text" id="price" name="rentPrice" placeholder="Rent Price">
+      
+          <br><br>
+      
+          <input type="text" id="price" name="location" placeholder="Location">
+      
+          <br><br>
+          <input type="file" name="mainImage" id="image">
+          <br><br>
+      
+          <button type="submit"> upload</button>
+      
+        </div>
+      </form>
+
+
+</div>
+   
+</div>
+</form>
+
+</body>
+</html>
+
+
+<%- include('../layouts/footer.ejs') %>
