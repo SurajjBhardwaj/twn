@@ -40,7 +40,7 @@ const sendVerifyMail = async (name, email, id) => {
       html:
         " <p1> hii " +
         name +
-        ' click here to <a href="http://localhost:5000/verify?id=' +
+        ' click here to <a href="https://townofbook.onrender.com/verify?id=' +
         id +
         ' " >  verify </a> your mail</p1>',
     };
@@ -55,6 +55,62 @@ const sendVerifyMail = async (name, email, id) => {
     res.status(404).send();
   }
 };
+
+
+
+const contactMail = async (req , res) => {
+
+  const name =req.body.namee;
+  const email=  req.body.email;
+  const Subject = req.body.subject;
+  const messege = req.body.messege;
+
+  console.log('name is '+ name + "from "+email+" regarding "+ Subject+" "+messege);
+
+
+  try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: "surajjbhardwaj@gmail.com",
+        pass: process.env.pass,
+      },
+    });
+    console.log(process.env.pass);
+    const mailOption = {
+      from: "surajjbhardwaj@gmail.com",
+      to: "pandeyyysuraj@gmail.com",
+      subject: "Contact support for "+ Subject,
+      html:`
+          <h2>Dear admin</h2><p> you're recieving this email to solve an issue of ${name} and ${email} ,<br/> he is facing issue regarding ${Subject} </p>
+          <b>Discription of issues : </b> <br>
+          <p>  ${messege} </p> <br/>
+          <p>regards</p>
+          <a href="https://townofbook.onrender.com" ><p>TOWN OF BOOK</p></a>
+      `
+       ,
+    };
+
+    transporter.sendMail(mailOption, function (error, info) {
+      if (error) console.log(error);
+      else {
+        console.log("email recieved ", info.response);
+       res.send(`<script>
+       alert("Form submitted successfully!");
+       window.location.href = "/";
+     </script>`)
+      }
+    });
+  } catch (error) {
+    res.status(404).send();
+  }
+};
+
+
+
 
 //smpt password : slflxbxsbmupufzf
 // email : securesally@gmail.com;
@@ -292,6 +348,7 @@ module.exports = {
   loadhome,
   logout,
   loadContact,
+  contactMail,
   loadview,
   loadnewbook,//faltu ka hai ise product route me already kiya tha
   loadbookrentt
