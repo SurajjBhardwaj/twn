@@ -56,6 +56,12 @@ mongoose.connect(process.env.URI,()=>{
  app.use("/",productRoute);
 
 // server listen on port
-app.listen(PORT,()=>{
+app.listen(process.env.PORT || 5000,()=>{
+    if(PORT){
     console.log("server is running at http://localhost:"+PORT);
+    }
+
+    else {
+        console.log("server is running at http://localhost:5000")
+    }
 }) 
