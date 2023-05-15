@@ -213,7 +213,6 @@ const loadhome = async (req, res) => {
 };
 
 // for logout
-
 const logout = async (req,res)=>{
    
     try {

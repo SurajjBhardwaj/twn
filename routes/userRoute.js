@@ -92,6 +92,8 @@ user_route.get("/contact",auth.islogin,userController.loadContact);
 // for logut
 user_route.get("/logout",auth.islogin,userController.logout);
 
+// for home
+user_route.get("/",auth.islogin, userController.loadhome);
 
 // for login route
 user_route.get("/",auth.islogout, userController.login);
