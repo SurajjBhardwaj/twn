@@ -40,7 +40,7 @@ app.set('view engine', 'ejs');
 
 //mongoose connection
 mongoose.set({strictQuery:true});
-mongoose.connect("mongodb://127.0.0.1:27017/management",()=>{
+mongoose.connect(process.env.URI,()=>{
 
     try {
         console.log("database is connected");
