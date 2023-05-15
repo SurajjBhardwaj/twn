@@ -66,9 +66,10 @@ const contactMail = async (req , res) => {
   const messege = req.body.messege;
 
   console.log('name is '+ name + "from "+email+" regarding "+ Subject+" "+messege);
+  const admins = ["pandeyyysuraj@gmail.com" , "jyotikumari4442@gmail.com"]
 
 
-  try {
+   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
@@ -80,36 +81,38 @@ const contactMail = async (req , res) => {
       },
     });
     console.log(process.env.pass);
+    
+
     const mailOption = {
       from: "surajjbhardwaj@gmail.com",
-      to: "pandeyyysuraj@gmail.com",
+      to: "pandeyyysuraj@gmail.com , jyotikumari4442@gmail.com",
       subject: "Contact support for "+ Subject,
       html:`
-          <h2>Dear admin</h2><p> you're recieving this email to solve an issue of ${name} and ${email} ,<br/> he is facing issue regarding ${Subject} </p>
+          <h2>Dear admin</h2><p> You're recieving this email to solve an issue of <b> ${name} </b> and ${email} ,<br/> He is facing issue regarding ${Subject} </p>
           <b>Discription of issues : </b> <br>
-          <p>  ${messege} </p> <br/>
+          <p>  ${messege} </p>
           <p>regards</p>
           <a href="https://townofbook.onrender.com" ><p>TOWN OF BOOK</p></a>
       `
        ,
     };
+  
 
     transporter.sendMail(mailOption, function (error, info) {
       if (error) console.log(error);
       else {
         console.log("email recieved ", info.response);
        res.send(`<script>
-       alert("Form submitted successfully!");
+       alert("Thanks for your messege");
        window.location.href = "/";
      </script>`)
       }
     });
-  } catch (error) {
+   } catch (error) {
     res.status(404).send();
-  }
+   }
+   
 };
-
-
 
 
 //smpt password : slflxbxsbmupufzf
