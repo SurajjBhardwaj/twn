@@ -150,15 +150,25 @@ const insertUser = async (req, res) => {
       // if we wants to send the json
       //   res.send((await saveddata).toJSON());
       res.status(200);
-      res.redirect("/login");
+      res.send(`<script>
+      alert("Registration successful!");
+      window.location.href = "/login";
+    </script>`);
+      // res.redirect("/login");
     } else {
       console.log("not saving data");
       res.status(400);
-      res.send("do it wag");
+      res.send(`<script>
+      alert("something gone wrong! try again");
+      window.location.href = "/rejister";
+    </script>`);
     }
   } catch (error) {
     console.log(error);
-    res.redirect("/rejister");
+    res.send(`<script>
+    alert("something gone wrong! try again");
+    window.location.href = "/rejister";
+  </script>`);
   }
 };
 
