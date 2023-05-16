@@ -68,7 +68,7 @@ const sendVerifyMail = async (name, email, id) => {
           pass: process.env.pass,
         },
       });
-      console.log(process.env.pass);
+   
       
   
       const mailOption = {
@@ -87,7 +87,9 @@ const sendVerifyMail = async (name, email, id) => {
     
   
       transporter.sendMail(mailOption, function (error, info) {
-        if (error) console.log(error);
+        if (error){ console.log("error at 90 ",error);
+              return;
+        }
         else {
           console.log(" admin recieved email ", info.response);
         //  res.send(`<script>
@@ -237,10 +239,10 @@ const sendVerifyMail = async (name, email, id) => {
             <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #000000;"><![endif]-->
             
         
-        <div class="u-row-container" style="padding: 0px;background-image: url('../public/emailImages/image-5.png');background-repeat: no-repeat;background-position: center top;background-color: transparent">
+        <div class="u-row-container" style="padding: 0px;background-image: url('https://raw.githubusercontent.com/SurajjBhardwaj/twn/master/public/emailImages/image-5.png');background-repeat: no-repeat;background-position: center top;background-color: transparent">
           <div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">
             <div style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
-              <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-image: url('../public/emailImages/image-5.png');background-repeat: no-repeat;background-position: center top;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: transparent;"><![endif]-->
+              <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-image: url('https://raw.githubusercontent.com/SurajjBhardwaj/twn/master/public/emailImages/image-5.png');background-repeat: no-repeat;background-position: center top;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: transparent;"><![endif]-->
               
         <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->
         <div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
@@ -265,7 +267,7 @@ const sendVerifyMail = async (name, email, id) => {
               <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 30px;font-family:'Open Sans',sans-serif;" align="left">
                 
           <div class="v-font-size" style="font-size: 14px; line-height: 140%; text-align: justify; word-wrap: break-word;">
-            <p style="line-height: 140%;"><strong>Dear [Sender's Name]</strong>,</p>
+            <p style="line-height: 140%;"><strong>Dear ${name}</strong>,</p>
         <p style="line-height: 140%;"> </p>
         <p style="line-height: 140%;">Thank you for reaching out to <bold>Town of book</bold> We are writing to confirm that we have received your recent email seeking assistance. Your message is important to us, and we appreciate the opportunity to help you.</p>
         <p style="line-height: 140%;"> </p>
@@ -324,7 +326,7 @@ const sendVerifyMail = async (name, email, id) => {
             <table align="left" border="0" cellspacing="0" cellpadding="0" width="32" height="32" style="width: 32px !important;height: 32px !important;display: inline-block;border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 10px">
               <tbody><tr style="vertical-align: top"><td align="left" valign="middle" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                 <a href="" title="Facebook" target="_blank">
-                  <img src="../public/emailImages/image-2.png" alt="Facebook" title="Facebook" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+                  <img src="https://raw.githubusercontent.com/SurajjBhardwaj/twn/master/public/emailImages/image-2.png" alt="Facebook" title="Facebook" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                 </a>
               </td></tr>
             </tbody></table>
@@ -334,7 +336,7 @@ const sendVerifyMail = async (name, email, id) => {
             <table align="left" border="0" cellspacing="0" cellpadding="0" width="32" height="32" style="width: 32px !important;height: 32px !important;display: inline-block;border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 10px">
               <tbody><tr style="vertical-align: top"><td align="left" valign="middle" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                 <a href="" title="Twitter" target="_blank">
-                  <img src="../public/emailImages/image-1.png" alt="Twitter" title="Twitter" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+                  <img src="https://raw.githubusercontent.com/SurajjBhardwaj/twn/master/public/emailImages/image-1.png" alt="Twitter" title="Twitter" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                 </a>
               </td></tr>
             </tbody></table>
@@ -344,7 +346,7 @@ const sendVerifyMail = async (name, email, id) => {
             <table align="left" border="0" cellspacing="0" cellpadding="0" width="32" height="32" style="width: 32px !important;height: 32px !important;display: inline-block;border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 10px">
               <tbody><tr style="vertical-align: top"><td align="left" valign="middle" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                 <a href="" title="LinkedIn" target="_blank">
-                  <img src="../public/emailImages/image-4.png" alt="LinkedIn" title="LinkedIn" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+                  <img src="https://raw.githubusercontent.com/SurajjBhardwaj/twn/master/public/emailImages/image-4.png" alt="LinkedIn" title="LinkedIn" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                 </a>
               </td></tr>
             </tbody></table>
@@ -354,7 +356,7 @@ const sendVerifyMail = async (name, email, id) => {
             <table align="left" border="0" cellspacing="0" cellpadding="0" width="32" height="32" style="width: 32px !important;height: 32px !important;display: inline-block;border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 0px">
               <tbody><tr style="vertical-align: top"><td align="left" valign="middle" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                 <a href="" title="Instagram" target="_blank">
-                  <img src="../public/emailImages/image-3.png" alt="Instagram" title="Instagram" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+                  <img src="https://raw.githubusercontent.com/SurajjBhardwaj/twn/master/public/emailImages/image-3.png" alt="Instagram" title="Instagram" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                 </a>
               </td></tr>
             </tbody></table>
