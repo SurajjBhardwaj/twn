@@ -82,7 +82,7 @@ user_route.get("/view",auth.islogin,userController.loadview);
 // });
 
 user_route.get("/contact",auth.islogin,userController.loadContact);
-user_route.post("/contact",auth.islogin,emailController.contactMail);
+user_route.post("/contact",auth.islogin,emailController.recieveMail);
 // function (req,res) {
 //          res.render("contact"); 
 // })
