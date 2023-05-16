@@ -6,7 +6,14 @@ const islogin = async (req, res, next) => {
       if (await req.session.user_id) {
         res.redirect("/home");
       } else {
-        return res.redirect("/login");
+
+        res.send(`<script>
+         alert("You can't go to the home directly");
+         window.location.href = "/login";
+       </script>`)
+
+
+        // return res.redirect("/login");
       }
     } else {
       next();
