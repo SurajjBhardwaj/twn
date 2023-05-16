@@ -31,6 +31,7 @@ user_route.use(bodyParser.urlencoded({ extended: true }));
 
 // controllers
 const userController = require("../controllers/userControllers");
+const emailController = require("../controllers/emailController");
 
 //multer
 const multer = require("multer");
@@ -81,7 +82,7 @@ user_route.get("/view",auth.islogin,userController.loadview);
 // });
 
 user_route.get("/contact",auth.islogin,userController.loadContact);
-user_route.post("/contact",auth.islogin,userController.contactMail);
+user_route.post("/contact",auth.islogin,emailController.contactMail);
 // function (req,res) {
 //          res.render("contact"); 
 // })

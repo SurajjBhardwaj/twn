@@ -18,8 +18,6 @@ const strongPassword = async (password) => {
 };
 
 // for send mail
-
-
 const sendVerifyMail = async (name, email, id) => {
   try {
     const transporter = nodemailer.createTransport({
