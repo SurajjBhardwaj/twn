@@ -9,7 +9,7 @@ const ejs=require("ejs");
 require("dotenv").config();
 const PORT=process.env.PORT;
 console.log("URI is : ",process.env.URI);
-console.log("port is "+process.env.PORT );
+
 
 //routes
 const userRoute = require("./routes/userRoute");

@@ -17,6 +17,7 @@ const auth = require("../middleware/auth");
 
 
 // controllers
+// const userController = require("../controllers/userControllers");
 const  ProductController = require("../controllers/productControllers");
 
 // multer
@@ -55,6 +56,7 @@ product_route.use(session({
 
 
  product_route.get("/appendbook",auth.islogin,ProductController.appendProduct);
+//  product_route.get("/appendbook",auth.islogout,userController.login);
 
 //for post route
 // ,auth.islogin
