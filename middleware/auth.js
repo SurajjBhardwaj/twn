@@ -22,7 +22,11 @@ const islogout = async (req, res, next) => {
     try {
       if (await req.session.user_id) {
         console.log("na na user logout nhi hai");
-        return res.redirect("/");
+        res.send(`<script>
+        alert("you are not allowed to visit here");
+        window.location.href = "/";
+      </script>`);
+        
       }else{
         console.log("case ho rha");
         next();
