@@ -24,7 +24,7 @@ const islogout = async (req, res, next) => {
         console.log("na na user logout nhi hai");
         return res.redirect("/");
       }else{
-        
+        console.log("case ho rha");
         next();
 
       }
