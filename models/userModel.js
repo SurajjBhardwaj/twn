@@ -23,6 +23,10 @@ const user = new mongoose.Schema({
         type:String,
         // required:true
     },
+    date:{
+        type:Date,
+        default:date.now
+       },
     is_admin:{
         type:Number,
         required:true

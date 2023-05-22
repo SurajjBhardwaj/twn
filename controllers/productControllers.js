@@ -1,6 +1,29 @@
 const product = require("../models/productModel");
 const users = require("../models/userModel");
 const nodemailer = require("nodemailer")
+// multer
+const multer = require("multer");
+const path = require("path");
+
+
+
+// storage for multer
+const storages = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../public/mainImage"));
+  },
+
+  filename: function (req, file, cb) {
+    const name = req.body.bookName + "-book-" + file.originalname;
+    console.log("book image name is ", name);
+    cb(null, name);
+  },
+});
+
+//for upload by multer
+const upload = multer({ storage: storages }, () => {
+  console.log("named successfully");
+});
 
 const appendProduct = async (req,res)=>{
     
@@ -48,7 +71,7 @@ const insertProduct = async (req,res)=>{
                 },
               });
                
-              const vender =await user.findOne({_id:req.session.user_id});
+              const vender =await users.findOne({_id:req.session.user_id});
               console.log("email of vender is ",vender.email);
 
               const mailOption = {
@@ -84,5 +107,6 @@ const insertProduct = async (req,res)=>{
  
 module.exports ={
     insertProduct,
-    appendProduct
+    appendProduct,
+    upload
 }

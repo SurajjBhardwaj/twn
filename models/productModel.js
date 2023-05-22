@@ -36,6 +36,10 @@ const productdata = new mongoose.Schema({
             type:String,
             required:true
        },
+       date:{
+        type:Date,
+        default:date.now
+       },
        rating:{
             type:Decimal128,
             default:0.0 

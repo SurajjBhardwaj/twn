@@ -2,6 +2,27 @@ const RejisterData = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const Mail = require("nodemailer/lib/mailer");
+const multer = require("multer");
+const path = require("path");
+
+// storage for multer
+const storages = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../public/userImage"));
+  },
+
+  filename: function (req, file, cb) {
+    const name = req.body.name + "-profile pic-" + file.originalname;
+    console.log("name is ", name);
+    cb(null, name);
+  },
+});
+
+//for upload by multer
+const upload = multer({ storage: storages }, () => {
+  console.log("named successfully");
+});
+
 
 // for strong password
 
@@ -362,5 +383,6 @@ module.exports = {
   contactMail,
   loadview,
   loadnewbook,//faltu ka hai ise product route me already kiya tha
-  loadbookrentt
+  loadbookrentt,
+  upload
 };
