@@ -20,12 +20,13 @@ const user = new mongoose.Schema({
         required:true
     },
     image:{
-        type:String,
+        data:Buffer,
+        contentType:String
         // required:true
     },
     date:{
         type:Date,
-        default:date.now
+        default: Date.now
        },
     is_admin:{
         type:Number,

@@ -4,19 +4,20 @@ const nodemailer = require("nodemailer");
 const Mail = require("nodemailer/lib/mailer");
 const multer = require("multer");
 const path = require("path");
+const { log } = require("console");
 
 // storage for multer
-const storages = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/userImage"));
-  },
+const storages = multer.memoryStorage(
+  // destination: function (req, file, cb) {
+  //   cb(null, path.join(__dirname, "../public/userImage"));
+  // },
 
-  filename: function (req, file, cb) {
-    const name = req.body.name + "-profile pic-" + file.originalname;
-    console.log("name is ", name);
-    cb(null, name);
-  },
-});
+  // filename: function (req, file, cb) {
+  //   const name = req.body.name + "-profile pic-" + file.originalname;
+  //   console.log("name is ", name);
+  //   cb(null, name);
+  // },
+);
 
 //for upload by multer
 const upload = multer({ storage: storages }, () => {
@@ -157,7 +158,10 @@ const insertUser = async (req, res) => {
       email: req.body.email,
       // hasshed password
       password: spassword,
-      image: req.file.filename,
+      image: {
+        data:req.file.buffer,
+        contentType: req.file.mimetype
+      },
       is_admin: 0,
     });
 
@@ -193,6 +197,31 @@ const insertUser = async (req, res) => {
   </script>`);
   }
 };
+
+const showing = async(req,res)=>{
+
+try {
+  
+  const id = req.session.user_id;
+  const users = await RejisterData.findOne({_id:id});
+
+  // const id = req.session.user_id;
+
+  // const user = RejisterData.find({"_id" : id});
+  console.log(users.name);
+  res.render("bufferimage",{user:users});
+      
+} catch (error) {
+  
+  console.log("error");
+
+} 
+
+
+
+}
+
+
 
 const verifyl = async (req, res) => {
   try {
@@ -384,5 +413,6 @@ module.exports = {
   loadview,
   loadnewbook,//faltu ka hai ise product route me already kiya tha
   loadbookrentt,
-  upload
+  upload,
+  showing
 };

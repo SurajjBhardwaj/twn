@@ -1,0 +1,9 @@
+<%- include('../layouts/header.ejs') %>
+
+
+
+    <img style="width: 100%; height: 50%;" src="data:<%= user.image.contentType %>;base64, <%= user.image.data.toString('base64') %> " alt="image not found">
+
+
+
+    <%- include('../users/footer.ejs') %>
