@@ -221,6 +221,64 @@ try {
 
 }
 
+const updateuser = async (req, res) => {
+  try {
+
+    const id = req.session.user_id;
+    const name = req.body.newname;
+    const email = req.body.newemail;
+    const mobile = req.body.mobile;
+    console.log(req.body.newname +" "+ req.body.newemail +" "+req.body.newmobile );
+    console.log(id);
+    const updatedUser = await RejisterData.findByIdAndUpdate(
+      id,
+      { name:name, email: email,mobile : mobile } );
+
+    // console.log(user.name);
+
+    if (updatedUser) {
+      res.send(
+        `<script>alert("User updated"); window.location.href="/image"</script>`
+      );
+    } else {
+      // console.log(error);
+      res.send(
+        `<script>alert("User not updated, please try again");</script>`
+      );
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
+
+
+// const updateuser = async(req,res)=>{
+
+//       const id = req.session._id;
+//       const name = req.body.name;
+//       const email = req.body.email;
+//       const mobile = req.body.mobile;
+
+
+//       const user = await RejisterData.findByIdAndUpdate(id,{
+//         name: name
+//         // mobile: mobile,
+//         // email: email
+//       });
+//       console.log(user);
+
+//       if(user){
+//         console.log(user);
+//         res.send(`<script>alert("user updated");window.location.href="/image"</script>`)
+//       }else{
+
+//         res.send(`<script>window.alert('user not updated,please try again');window.location.href="/"</script>`);
+//       }
+// }
+
 
 
 const verifyl = async (req, res) => {
@@ -414,5 +472,6 @@ module.exports = {
   loadnewbook,//faltu ka hai ise product route me already kiya tha
   loadbookrentt,
   upload,
-  showing
+  showing,
+  updateuser
 };
