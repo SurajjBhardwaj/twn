@@ -26,7 +26,7 @@ const user = new mongoose.Schema({
     },
     date:{
         type:Date,
-        default:date.now
+        default: Date.now
        },
     is_admin:{
         type:Number,

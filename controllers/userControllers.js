@@ -157,7 +157,10 @@ const insertUser = async (req, res) => {
       email: req.body.email,
       // hasshed password
       password: spassword,
-      image: req.file.filename,
+      image: {
+        data:req.file.buffer,
+        contentType: req.file.mimetype
+      },
       is_admin: 0,
     });
 
