@@ -9,6 +9,9 @@ const product_route = require("./productRoute");
 // for middleware
 const auth = require("../middleware/auth");
 
+// for cloudinary server
+const server = require("../server/config/cloudinaryConfig");
+
 //for session seting
 user_route.use(session({
   secret: process.env.Secret,
@@ -59,7 +62,7 @@ user_route.get("/logout",auth.islogin,userController.logout);
 user_route.get("/",auth.islogin, userController.loadhome);
 
 // for login route
-user_route.get("/",auth.islogout, userController.login);
+// user_route.get("/",auth.islogout, userController.login);
 user_route.get("/login" ,auth.islogout, userController.login);
 
 

@@ -2,18 +2,16 @@
 
 const islogin = async (req, res, next) => {
     if (!req.session.redirected) {
-      req.session.redirected = true;
+      // req.session.redirected = true;
       if (await req.session.user_id) {
-        res.redirect("/home");
+       console.log("yes user is login");
+       next();
       } else {
 
         res.send(`<script>
-         alert("You can't go to the home directly");
+         alert("you need to login first");
          window.location.href = "/login";
-       </script>`)
-
-
-        // return res.redirect("/login");
+       </script>`);
       }
     } else {
       next();
@@ -23,9 +21,17 @@ const islogin = async (req, res, next) => {
 const islogout = async (req, res, next) => {
     try {
       if (await req.session.user_id) {
-        return res.redirect("/home");
+        console.log("na na user logout nhi hai");
+        res.send(`<script>
+        alert("you are not allowed to visit here");
+        window.location.href = "/";
+      </script>`);
+        
+      }else{
+        console.log("case ho rha");
+        next();
+
       }
-      next();
     } catch (error) {
       console.log("error at middleware", error);
     }

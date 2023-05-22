@@ -10,6 +10,7 @@ const middleware = require("../middleware/uploadMiddleware");
 const auth = require("../middleware/auth");
 
 // controllers
+// const userController = require("../controllers/userControllers");
 const  ProductController = require("../controllers/productControllers");
 
 
@@ -26,6 +27,7 @@ product_route.use(session({
 
 
  product_route.get("/appendbook",auth.islogin,ProductController.appendProduct);
+//  product_route.get("/appendbook",auth.islogout,userController.login);
 
 //for post route
 // ,auth.islogin

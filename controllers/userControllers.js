@@ -141,7 +141,7 @@ const loadRejister = async (req, res) => {
   try {
     res.status(200);
     res.render("rejistration",{name:"login/rejister"});
-    console.log("rejister route is running");
+    console.log(" kaha ho bro,rejister route is running");
   } catch (error) {
     console.log(error);
   }
