@@ -7,17 +7,7 @@ const path = require("path");
 const { log } = require("console");
 
 // storage for multer
-const storages = multer.memoryStorage(
-  // destination: function (req, file, cb) {
-  //   cb(null, path.join(__dirname, "../public/userImage"));
-  // },
-
-  // filename: function (req, file, cb) {
-  //   const name = req.body.name + "-profile pic-" + file.originalname;
-  //   console.log("name is ", name);
-  //   cb(null, name);
-  // },
-);
+const storages = multer.memoryStorage();
 
 //for upload by multer
 const upload = multer({ storage: storages }, () => {
@@ -251,34 +241,6 @@ const updateuser = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
-
-
-
-
-// const updateuser = async(req,res)=>{
-
-//       const id = req.session._id;
-//       const name = req.body.name;
-//       const email = req.body.email;
-//       const mobile = req.body.mobile;
-
-
-//       const user = await RejisterData.findByIdAndUpdate(id,{
-//         name: name
-//         // mobile: mobile,
-//         // email: email
-//       });
-//       console.log(user);
-
-//       if(user){
-//         console.log(user);
-//         res.send(`<script>alert("user updated");window.location.href="/image"</script>`)
-//       }else{
-
-//         res.send(`<script>window.alert('user not updated,please try again');window.location.href="/"</script>`);
-//       }
-// }
-
 
 
 const verifyl = async (req, res) => {

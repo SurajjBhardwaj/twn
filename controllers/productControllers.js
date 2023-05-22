@@ -7,23 +7,7 @@ const path = require("path");
 
 
 
-// storage for multer
-const storages = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/mainImage"));
-  },
 
-  filename: function (req, file, cb) {
-    const name = req.body.bookName + "-book-" + file.originalname;
-    console.log("book image name is ", name);
-    cb(null, name);
-  },
-});
-
-//for upload by multer
-const upload = multer({ storage: storages }, () => {
-  console.log("named successfully");
-});
 
 const appendProduct = async (req,res)=>{
     
@@ -35,6 +19,16 @@ const appendProduct = async (req,res)=>{
     res.render("product",{name:user.name});
 
 }
+
+
+// storage for multer
+const storage = multer.memoryStorage();
+
+//for upload by multer
+const upload = multer({ storage: storage }, () => {
+  console.log("named successfully");
+});
+
 
 
 const insertProduct = async (req,res)=>{
@@ -49,7 +43,10 @@ const insertProduct = async (req,res)=>{
           vender_id:req.session.user_id,
           rentPrice:req.body.rentPrice,
           location:req.body.location,          
-          image: req.file.filename,
+          image: {
+            data:req.file.buffer,
+            contentType: req.file.mimetype
+          }
         //   coverImages: req.file.filename,
         });
         
