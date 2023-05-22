@@ -64,7 +64,7 @@ user_route.get("/",auth.islogin, userController.loadhome);
 // for login route
 // user_route.get("/",auth.islogout, userController.login);
 user_route.get("/login" ,auth.islogout, userController.login);
-
+user_route.get("/image",auth.islogin,  userController.showing);
 
 
 
