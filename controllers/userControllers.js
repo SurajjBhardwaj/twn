@@ -6,17 +6,17 @@ const multer = require("multer");
 const path = require("path");
 
 // storage for multer
-const storages = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/userImage"));
-  },
+const storages = multer.memoryStorage(
+  // destination: function (req, file, cb) {
+  //   cb(null, path.join(__dirname, "../public/userImage"));
+  // },
 
-  filename: function (req, file, cb) {
-    const name = req.body.name + "-profile pic-" + file.originalname;
-    console.log("name is ", name);
-    cb(null, name);
-  },
-});
+  // filename: function (req, file, cb) {
+  //   const name = req.body.name + "-profile pic-" + file.originalname;
+  //   console.log("name is ", name);
+  //   cb(null, name);
+  // },
+);
 
 //for upload by multer
 const upload = multer({ storage: storages }, () => {
