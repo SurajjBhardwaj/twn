@@ -50,6 +50,7 @@ This project will run at``` https://localhost:${process.env.port}```
 ---------------------
 
 ## <h2> Features of this project :</h2>
+* EveryCode is arranged and well structured USING MVC file structure
 * User login/register and verification through email
 * auto email service for almost every activity
 * Using session, created session for a user
