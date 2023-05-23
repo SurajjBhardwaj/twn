@@ -47,7 +47,23 @@ congrats !! this project is ready to execute in your browser,
 
 This project will run at``` https://localhost:${process.env.port}```
 
-work flow will be updated very soon.
+---------------------
+
+## <h2> Features of this project :</h2>
+* User login/register and verification through email
+* auto email service for almost every activity
+* Using session, created session for a user
+* we are encoding for the passwords using bcyrpt
+* encoding for saving image in mongodb usign base 64 encoding and decoding
+* User update system
+* perfect mongoose schema
+* middleware authentication for where he is allowed to access and where not
+* any user can be the vender for our product service 
+* beautiful and unique ui including log in page,sign up page and home page
+
+--------------------------------------
+
+# Work flow will be updated very soon.
 
 
 
