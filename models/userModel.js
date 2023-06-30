@@ -1,4 +1,5 @@
 // requiring mongoose for connection
+const { Timestamp } = require("mongodb");
 const mongoose = require("mongoose");
 
 const user = new mongoose.Schema({
@@ -35,7 +36,11 @@ const user = new mongoose.Schema({
         type:Number,
         default:0
     },
-});
+    token:{
+        type:String,
+        default:''
+    },
+},{timestamps:true});
 
 // console.log(userSchema);
 const User= mongoose.model("User",user);

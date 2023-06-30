@@ -5,6 +5,7 @@ const Mail = require("nodemailer/lib/mailer");
 const multer = require("multer");
 const path = require("path");
 const { log } = require("console");
+const randomString = require("randomstring");
 
 // storage for multer
 const storages = multer.memoryStorage();
@@ -144,12 +145,14 @@ const insertUser = async (req, res) => {
     console.log("working");
 
     const em = req.body.email;
-    const dub = RejisterData.find({email:em});
+    const dub = await RejisterData.find({email:em});
     const ph = req.body.mobile;
-    const dub1 = RejisterData.find({mobile:ph})
+    const dub1 = await RejisterData.find({mobile:ph})
     console.log(em);
      
-    if(dub || dub1){
+    if(dub.length>1 || dub1.length>1){
+      console.log(dub);
+      console.log(dub1);
       res.status(200);
       console.log("dublicate user");
       res.send(`<script>
@@ -390,7 +393,7 @@ const sendForgetMail = async (name, email, id) => {
       html:
         " <p1> hii " +
         name +
-        ' click here to <a href="http://localhost:5000/resetpassword?id=' +
+        ' click here to <a href="https://townofbooks.onrender.com/resetpassword?id=' +
         id +
         ' " >  reset </a> your password</p1>',
     };
@@ -413,7 +416,6 @@ const forgetPassword = async (req,res) => {
 
   const id = req.session.user_id;
   const user = await RejisterData.findOne({_id:id});
-
   res.render("forget",{user:user});
 }
 
@@ -421,10 +423,13 @@ const sendResetPasswordEmail = async (req, res) => {
   const email = req.body.email;
   try {
     const user = await RejisterData.findOne({ email: email }); // Use findOne instead of find to retrieve a single document
+    const token = randomString.generate();
+    const us = await RejisterData.updateOne({email:email},{$set:{token:token}})
+
 
     if (user) { // Check if user exists (findOne will return null if no user found)
       console.log("user is ", user.name);
-      sendForgetMail(user.name, user.email, user._id);
+      sendForgetMail(user.name, user.email, token);
       res.status(200).send("Check your email for password reset instructions.");
     } else {
       console.log("no user");
@@ -452,8 +457,11 @@ const sendResetPasswordEmail = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   try {
+    const token = req.query.id;
+    const user = await RejisterData.findOne({token:token});
     res.status(200);
-    res.render("resetPassword");
+    console.log("here is the tokken",token);
+    res.render("resetPassword", {token:token,user:user});
     console.log("in the last stage");
   } catch (error) {
     console.log(error);
@@ -462,52 +470,67 @@ const resetPassword = async (req, res) => {
 
 
 const changePassword = async (req, res) => {
-  const { password, cpassword } = req.body;
-  const id = req.query.id;
+  const password = req.body.password;
+  const cpassword = req.body.cpassword;
+  const token = req.body.token;
 
   if (cpassword === password) {
     try {
-      const updateInfo = await RejisterData.updateOne(
-        { _id: id },
-        { $set: { password: password } }
-      );
+      const newpass = await strongPassword(password);
+      const user = await RejisterData.findOne({ token }).exec();
 
-      if (updateInfo) {
+      if (!user) {
+        return res.send(`
+          <script>
+            alert("Invalid token.");
+            window.location.href = "/";
+          </script>
+        `);
+      }
+
+      user.password = newpass;
+      user.token = '';
+
+      const updatedUser = await user.save();
+
+      if (updatedUser) {
+        // console.log(updatedUser);
         console.log("Password updated:", password);
-        res.send(`
+        return res.send(`
           <script>
             alert("Password changed successfully.");
-            window.location.href="/login";
+            window.location.href = "/login";
           </script>
         `);
       } else {
         console.log("No change");
-        res.send(`
+        return res.send(`
           <script>
             alert("Failed to update password.");
-            window.location.href="/";
+            window.location.href = "/";
           </script>
         `);
       }
     } catch (error) {
       console.log("Error updating password:", error.message);
-      res.status(500).send(`
+      return res.status(500).send(`
         <script>
           alert("Internal server error. Please try again later.");
-          window.location.href="/";
+          window.location.href = "/";
         </script>
       `);
     }
   } else {
     console.log("Password doesn't match");
-    res.send(`
+    return res.send(`
       <script>
         alert("Passwords do not match.");
-        window.location.href="/";
+        window.location.href = "/";
       </script>
     `);
   }
 };
+
 
 
 
