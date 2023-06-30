@@ -142,6 +142,22 @@ const insertUser = async (req, res) => {
   try {
     const spassword = await strongPassword(req.body.password);
     console.log("working");
+
+    const em = req.body.email;
+    const dub = RejisterData.find({email:em});
+    console.log(em);
+     
+    if(dub){
+      res.status(200);
+      console.log("dublicate user");
+      res.send(`<script>
+      alert("user already exist, please login");
+      window.location.href="/login"
+      </script>`)
+    }
+
+    else{
+
     const user = new RejisterData({
       name: req.body.name,
       mobile: req.body.mobile,
@@ -155,7 +171,7 @@ const insertUser = async (req, res) => {
       is_admin: 0,
     });
 
-    console.log("user ", user);
+    // console.log("user ", user);
     const saveddata = user.save();
 
     if (saveddata) {
@@ -179,6 +195,8 @@ const insertUser = async (req, res) => {
       window.location.href = "/rejister";
     </script>`);
     }
+  }
+
   } catch (error) {
     console.log(error);
     res.send(`<script>
