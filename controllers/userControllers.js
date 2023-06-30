@@ -293,7 +293,7 @@ const verifylogin = async (req, res) => {
   try {
     req.session.redirected = false;
     const email = req.body.email;
-    console.log("password is ", email);
+    console.log("email is ", email);
 
     const Pasword = req.body.password;
     console.log("password is ", Pasword);
