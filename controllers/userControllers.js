@@ -131,8 +131,11 @@ const contactMail = async (req , res) => {
 const loadRejister = async (req, res) => {
   try {
     res.status(200);
-    res.render("rejistration",{name:"login/rejister"});
-    console.log(" kaha ho bro,rejister route is running");
+    const user = {
+      name:"login/register"
+    }
+    res.render("rejistration",{user:user});
+    console.log(" kaha ho bro,register route is running");
   } catch (error) {
     console.log(error);
   }
@@ -211,6 +214,11 @@ try {
 
 }
 
+const upload3 = multer({ storage: storages }, () => {
+  console.log("named successfully");
+});
+
+
 const updateuser = async (req, res) => {
   try {
 
@@ -218,11 +226,27 @@ const updateuser = async (req, res) => {
     const name = req.body.newname;
     const email = req.body.newemail;
     const mobile = req.body.mobile;
+   
+    
     console.log(req.body.newname +" "+ req.body.newemail +" "+req.body.newmobile );
     console.log(id);
+
+    const updateduser =  { name:name,
+      email: email,
+      mobile : mobile,
+      }
+
+    if (req.file) {
+      updateuser.image = {
+        data: req.file.buffer,
+        contentType: req.file.mimetype
+      };
+    }
+
     const updatedUser = await RejisterData.findByIdAndUpdate(
-      id,
-      { name:name, email: email,mobile : mobile } );
+      id,updateduser );
+
+      console.log("data is", updatedUser.image.data);
 
     // console.log(user.name);
 
@@ -333,7 +357,11 @@ const loginerr = async (req,res)=>{
 const login = async (req, res) => {
   try {
     res.status(200);
-    res.render("login",{name:"login/rejister"});
+    const user = {
+      name:"login/register"
+    }
+    console.log("check ",user.name);
+    res.render("login",{user:user});
   } catch (error) {
     console.log("error " + error);
   }
@@ -344,8 +372,8 @@ const loadhome = async (req, res) => {
     res.status(200);
     const id = req.session.user_id;
     const user = await RejisterData.findOne({_id:id});
-    console.log(user);
-  res.render("home",{name:user.name});
+    // console.log(user);
+  res.render("home",{user:user});
   console.log("successfully logined");
 };
 
@@ -369,7 +397,7 @@ const loadContact = async(req,res)=>{
       res.status(200);
       const id = req.session.user_id;
       const user = await RejisterData.findOne({_id:id});
-      res.render("contact",{name:user.name});
+      res.render("contact",{user:user});
     } catch (error) {
         console.log("error is ",error);
     }
@@ -383,7 +411,7 @@ const loadview = async(req,res)=>{
       const id = req.session.user_id;
       const user = await RejisterData.findOne({_id:id});
       console.log(user);
-    res.render("view",{name:user.name});
+    res.render("view",{user:user});
     } catch (error) {
         console.log("error is ",error);
     }
@@ -396,7 +424,7 @@ const loadbookrentt = async(req,res)=>{
       const id = req.session.user_id;
       const user = await RejisterData.findOne({_id:id});
       console.log(user);
-    res.render("bookrentt",{name:user.name});
+    res.render("bookrentt",{user:user});
     } catch (error) {
         console.log("error is ",error);
     }
@@ -434,6 +462,7 @@ module.exports = {
   loadnewbook,//faltu ka hai ise product route me already kiya tha
   loadbookrentt,
   upload,
+  upload3,
   showing,
   updateuser
 };

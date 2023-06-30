@@ -77,9 +77,11 @@ z-index: 100;
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/login">
-            <% if (typeof name !== 'undefined') { %>
-                <%= name %>
-                <% } %></a>
+            <% if (typeof user !== 'undefined') { %>
+                <%= user.name %>
+                <% } %> 
+
+              </a>
       </li>
     </ul>
   </nav> 

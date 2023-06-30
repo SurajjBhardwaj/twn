@@ -2,7 +2,11 @@
 <br><br><br><br>
 <center>
 <div style="display: flex; flex-direction:column;" >
+    <% if(typeof user.image.data!=='undefined') { %> 
     <img style="width: 100px; height: 100px;" src="data:<%= user.image.contentType %>;base64, <%= user.image.data.toString('base64') %> " alt="image not found"><br>
+    <% } else { %>
+        image not available
+        <% } %> 
     <!-- <form action="/image" method="POST" >
         <label for="name"> Name </label>
         <input type="text" name="name" value="<%= user.name %>"><br>
@@ -22,6 +26,14 @@
       
         <label for="email">Email:</label>
         <input type="text" name="newemail" value="<%= user.email %>"><br>
+        <% if(typeof user.image.data!=='undefined') { %> 
+            <label for="image">Update Profile pic</label>
+        <input type="file" name="image" placeholder="update profile pic" accept="image/*"> <br>
+            <% } else { %>
+                <label for="image">add Profile pic</label>
+                <input type="file" name="image" placeholder="add Profile pic" accept="image/*" >
+                <% } %> 
+       
       
         <input type="submit" value="Submit">
       </form>
