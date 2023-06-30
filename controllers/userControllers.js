@@ -405,7 +405,7 @@ const loadbookrentt = async(req,res)=>{
       res.status(200);
       const id = req.session.user_id;
       const user = await RejisterData.findOne({_id:id});
-      console.log(user);
+      // console.log(user);
     res.render("bookrentt",{user:user});
     } catch (error) {
         console.log("error is ",error);

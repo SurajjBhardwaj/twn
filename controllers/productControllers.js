@@ -15,7 +15,7 @@ const appendProduct = async (req,res)=>{
     res.status(200);
     const id = req.session.user_id;
     const user = await users.findOne({_id:id});
-    console.log(user);
+    // console.log(user);
     res.render("product",{user:user});
 
 }
