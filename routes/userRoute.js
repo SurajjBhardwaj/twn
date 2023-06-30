@@ -66,12 +66,13 @@ user_route.get("/",auth.islogin, userController.loadhome);
 // user_route.get("/",auth.islogout, userController.login);
 user_route.get("/login" ,auth.islogout, userController.login);
 user_route.get("/image",auth.islogin,  userController.showing);
-
-
+user_route.get("/forget",auth.islogout, userController.forgetPassword);
+user_route.get("/resetpassword", userController.resetPassword);
 
 //for post routes
-
-user_route.post("/rejister", userController.upload.single("image"), userController.insertUser);
+user_route.post("/resetpassword",auth.islogout, userController.changePassword);
+user_route.post("/forget", auth.islogout, userController.sendResetPasswordEmail);
+user_route.post("/rejister",auth.islogout, userController.upload.single("image"), userController.insertUser);
 
 user_route.post("/login", userController.verifylogin);
 

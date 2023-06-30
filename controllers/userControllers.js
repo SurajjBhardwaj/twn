@@ -142,6 +142,24 @@ const insertUser = async (req, res) => {
   try {
     const spassword = await strongPassword(req.body.password);
     console.log("working");
+
+    const em = req.body.email;
+    const dub = RejisterData.find({email:em});
+    const ph = req.body.mobile;
+    const dub1 = RejisterData.find({mobile:ph})
+    console.log(em);
+     
+    if(dub || dub1){
+      res.status(200);
+      console.log("dublicate user");
+      res.send(`<script>
+      alert("user already exist, please login");
+      window.location.href="/login"
+      </script>`)
+    }
+
+    else{
+
     const user = new RejisterData({
       name: req.body.name,
       mobile: req.body.mobile,
@@ -155,7 +173,7 @@ const insertUser = async (req, res) => {
       is_admin: 0,
     });
 
-    console.log("user ", user);
+    // console.log("user ", user);
     const saveddata = user.save();
 
     if (saveddata) {
@@ -179,6 +197,8 @@ const insertUser = async (req, res) => {
       window.location.href = "/rejister";
     </script>`);
     }
+  }
+
   } catch (error) {
     console.log(error);
     res.send(`<script>
@@ -273,7 +293,7 @@ const verifylogin = async (req, res) => {
   try {
     req.session.redirected = false;
     const email = req.body.email;
-    console.log("password is ", email);
+    console.log("email is ", email);
 
     const Pasword = req.body.password;
     console.log("password is ", Pasword);
@@ -348,6 +368,154 @@ const login = async (req, res) => {
     console.log("error " + error);
   }
 };
+
+// for send mail
+const sendForgetMail = async (name, email, id) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: "surajjbhardwaj@gmail.com",
+        pass: process.env.pass,
+      },
+    });
+    console.log(process.env.pass);
+    const mailOption = {
+      from: "surajjbhardwaj@gmail.com",
+      to: email,
+      subject: "Password reset mail",
+      html:
+        " <p1> hii " +
+        name +
+        ' click here to <a href="http://localhost:5000/resetpassword?id=' +
+        id +
+        ' " >  reset </a> your password</p1>',
+    };
+
+    transporter.sendMail(mailOption, function (error, info) {
+      if (error) console.log(error);
+      else {
+        console.log("email has been send ", info.response);
+      }
+    });
+  } catch (error) {
+    res.status(404).send();
+  }
+};
+
+
+
+// forget password
+const forgetPassword = async (req,res) => {
+
+  const id = req.session.user_id;
+  const user = await RejisterData.findOne({_id:id});
+
+  res.render("forget",{user:user});
+}
+
+const sendResetPasswordEmail = async (req, res) => {
+  const email = req.body.email;
+  try {
+    const user = await RejisterData.findOne({ email: email }); // Use findOne instead of find to retrieve a single document
+
+    if (user) { // Check if user exists (findOne will return null if no user found)
+      console.log("user is ", user.name);
+      sendForgetMail(user.name, user.email, user._id);
+      res.status(200).send("Check your email for password reset instructions.");
+    } else {
+      console.log("no user");
+      res.status(400).send(`
+        <script>
+          alert("User does not exist. Please provide a valid email.");
+          window.location.href="/forget";
+        </script>
+      `);
+    }
+  } catch (error) {
+    res.status(500).send(`
+      <script>
+        alert("Internal server error. Please try again later.");
+        window.location.href="/";
+      </script>
+    `);
+    console.log("Error at forget post", error.message);
+  }
+}
+
+
+
+
+
+const resetPassword = async (req, res) => {
+  try {
+    res.status(200);
+    res.render("resetPassword");
+    console.log("in the last stage");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+const changePassword = async (req, res) => {
+  const { password, cpassword } = req.body;
+  const id = req.query.id;
+
+  if (cpassword === password) {
+    try {
+      const updateInfo = await RejisterData.updateOne(
+        { _id: id },
+        { $set: { password: password } }
+      );
+
+      if (updateInfo) {
+        console.log("Password updated:", password);
+        res.send(`
+          <script>
+            alert("Password changed successfully.");
+            window.location.href="/login";
+          </script>
+        `);
+      } else {
+        console.log("No change");
+        res.send(`
+          <script>
+            alert("Failed to update password.");
+            window.location.href="/";
+          </script>
+        `);
+      }
+    } catch (error) {
+      console.log("Error updating password:", error.message);
+      res.status(500).send(`
+        <script>
+          alert("Internal server error. Please try again later.");
+          window.location.href="/";
+        </script>
+      `);
+    }
+  } else {
+    console.log("Password doesn't match");
+    res.send(`
+      <script>
+        alert("Passwords do not match.");
+        window.location.href="/";
+      </script>
+    `);
+  }
+};
+
+
+
+
+
+
+
+
 
 //for load home
 const loadhome = async (req, res) => {
@@ -446,5 +614,9 @@ module.exports = {
   upload,
   upload3,
   showing,
-  updateuser
+  updateuser,
+  forgetPassword,
+  sendResetPasswordEmail,
+  resetPassword,
+  changePassword
 };
