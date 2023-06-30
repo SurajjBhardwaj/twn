@@ -145,9 +145,11 @@ const insertUser = async (req, res) => {
 
     const em = req.body.email;
     const dub = RejisterData.find({email:em});
+    const ph = req.body.mobile;
+    const dub1 = RejisterData.find({mobile:ph})
     console.log(em);
      
-    if(dub){
+    if(dub || dub1){
       res.status(200);
       console.log("dublicate user");
       res.send(`<script>
