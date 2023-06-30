@@ -7,7 +7,7 @@ const ejs=require("ejs");
 
 //dot env file equipment
 require("dotenv").config();
-const PORT=process.env.PORT || 5001;
+const PORT= process.env.PORT || 5001;
 console.log("URI is : ",process.env.URI);
 
 
@@ -56,12 +56,8 @@ mongoose.connect(process.env.URI,()=>{
  app.use("/",productRoute);
 
 // server listen on port
-app.listen(process.env.PORT || 5000,()=>{
-    if(PORT){
-    console.log("server is running at http://localhost:"+PORT);
-    }
-
-    else {
-        console.log("server is running at http://localhost:5000")
-    }
+app.listen(PORT,()=>{
+   
+        console.log(`server is running at http://localhost:${PORT}`)
+    
 }) 
