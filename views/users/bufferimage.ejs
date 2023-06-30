@@ -1,4 +1,4 @@
-<%- include('../layouts/header.ejs') %>
+<%- include('../layouts/header1.ejs') %>
 <br><br><br><br>
 <center>
 <div style="display: flex; flex-direction:column;" >
@@ -17,12 +17,12 @@
         <input type="button" value="submit" onclick="this.form.submit()">
     </form>-->
 
-    <form action="/updateuser" method="POST">
+    <form action="/updateuser" method="POST" enctype="multipart/form-data">
         <label for="name">Name:</label>
         <input type="text" name="newname" value="<%= user.name %>"><br>
       
         <label for="mobile">Mobile No:</label>
-        <input type="text" name="newmobile" value="<%= user.mobile %>"><br>
+        <input type="text" name="mobile" value="<%= user.mobile %>"><br>
       
         <label for="email">Email:</label>
         <input type="text" name="newemail" value="<%= user.email %>"><br>

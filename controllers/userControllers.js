@@ -131,10 +131,7 @@ const contactMail = async (req , res) => {
 const loadRejister = async (req, res) => {
   try {
     res.status(200);
-    const user = {
-      name:"login/register"
-    }
-    res.render("rejistration",{user:user});
+    res.render("rejistration");
     console.log(" kaha ho bro,register route is running");
   } catch (error) {
     console.log(error);
@@ -198,9 +195,6 @@ try {
   const id = req.session.user_id;
   const users = await RejisterData.findOne({_id:id});
 
-  // const id = req.session.user_id;
-
-  // const user = RejisterData.find({"_id" : id});
   console.log(users.name);
   res.render("bufferimage",{user:users});
       
@@ -214,55 +208,47 @@ try {
 
 }
 
-const upload3 = multer({ storage: storages }, () => {
+const storage = multer.memoryStorage();
+const upload3 = multer({ storage }, () => {
   console.log("named successfully");
 });
 
 
 const updateuser = async (req, res) => {
   try {
-
     const id = req.session.user_id;
     const name = req.body.newname;
     const email = req.body.newemail;
     const mobile = req.body.mobile;
-   
-    
-    console.log(req.body.newname +" "+ req.body.newemail +" "+req.body.newmobile );
-    console.log(id);
 
-    const updateduser =  { name:name,
+    const updatedUser = {
+      name: name,
       email: email,
-      mobile : mobile,
+      mobile: mobile
+    };
+
+   
+      if (req.file) {
+        updatedUser.image={
+            data: req.file.buffer,
+            contentType: req.file.mimetype
+        };
       }
 
-    if (req.file) {
-      updateuser.image = {
-        data: req.file.buffer,
-        contentType: req.file.mimetype
-      };
-    }
+    const user = await RejisterData.findByIdAndUpdate(id, updatedUser);
 
-    const updatedUser = await RejisterData.findByIdAndUpdate(
-      id,updateduser );
-
-      console.log("data is", updatedUser.image.data);
-
-    // console.log(user.name);
-
-    if (updatedUser) {
+    if (user) {
       res.send(
         `<script>alert("User updated"); window.location.href="/image"</script>`
       );
     } else {
-      // console.log(error);
       res.send(
-        `<script>alert("User not updated, please try again");</script>`
+        `<script>alert("User not updated, please try again"); window.location.href="/image"</script>`
       );
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send( `<script>alert("User not updated, please try again \n internal server error "); window.location.href="/image"</script>`);
   }
 };
 
@@ -357,11 +343,7 @@ const loginerr = async (req,res)=>{
 const login = async (req, res) => {
   try {
     res.status(200);
-    const user = {
-      name:"login/register"
-    }
-    console.log("check ",user.name);
-    res.render("login",{user:user});
+    res.render("login");
   } catch (error) {
     console.log("error " + error);
   }
