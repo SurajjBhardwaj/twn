@@ -131,8 +131,8 @@ const contactMail = async (req , res) => {
 const loadRejister = async (req, res) => {
   try {
     res.status(200);
-    res.render("rejistration",{name:"login/rejister"});
-    console.log(" kaha ho bro,rejister route is running");
+    res.render("rejistration");
+    console.log(" kaha ho bro,register route is running");
   } catch (error) {
     console.log(error);
   }
@@ -195,9 +195,6 @@ try {
   const id = req.session.user_id;
   const users = await RejisterData.findOne({_id:id});
 
-  // const id = req.session.user_id;
-
-  // const user = RejisterData.find({"_id" : id});
   console.log(users.name);
   res.render("bufferimage",{user:users});
       
@@ -211,34 +208,47 @@ try {
 
 }
 
+const storage = multer.memoryStorage();
+const upload3 = multer({ storage }, () => {
+  console.log("named successfully");
+});
+
+
 const updateuser = async (req, res) => {
   try {
-
     const id = req.session.user_id;
     const name = req.body.newname;
     const email = req.body.newemail;
     const mobile = req.body.mobile;
-    console.log(req.body.newname +" "+ req.body.newemail +" "+req.body.newmobile );
-    console.log(id);
-    const updatedUser = await RejisterData.findByIdAndUpdate(
-      id,
-      { name:name, email: email,mobile : mobile } );
 
-    // console.log(user.name);
+    const updatedUser = {
+      name: name,
+      email: email,
+      mobile: mobile
+    };
 
-    if (updatedUser) {
+   
+      if (req.file) {
+        updatedUser.image={
+            data: req.file.buffer,
+            contentType: req.file.mimetype
+        };
+      }
+
+    const user = await RejisterData.findByIdAndUpdate(id, updatedUser);
+
+    if (user) {
       res.send(
         `<script>alert("User updated"); window.location.href="/image"</script>`
       );
     } else {
-      // console.log(error);
       res.send(
-        `<script>alert("User not updated, please try again");</script>`
+        `<script>alert("User not updated, please try again"); window.location.href="/image"</script>`
       );
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send( `<script>alert("User not updated, please try again \n internal server error "); window.location.href="/image"</script>`);
   }
 };
 
@@ -333,7 +343,7 @@ const loginerr = async (req,res)=>{
 const login = async (req, res) => {
   try {
     res.status(200);
-    res.render("login",{name:"login/rejister"});
+    res.render("login");
   } catch (error) {
     console.log("error " + error);
   }
@@ -344,8 +354,8 @@ const loadhome = async (req, res) => {
     res.status(200);
     const id = req.session.user_id;
     const user = await RejisterData.findOne({_id:id});
-    console.log(user);
-  res.render("home",{name:user.name});
+    // console.log(user);
+  res.render("home",{user:user});
   console.log("successfully logined");
 };
 
@@ -369,7 +379,7 @@ const loadContact = async(req,res)=>{
       res.status(200);
       const id = req.session.user_id;
       const user = await RejisterData.findOne({_id:id});
-      res.render("contact",{name:user.name});
+      res.render("contact",{user:user});
     } catch (error) {
         console.log("error is ",error);
     }
@@ -383,7 +393,7 @@ const loadview = async(req,res)=>{
       const id = req.session.user_id;
       const user = await RejisterData.findOne({_id:id});
       console.log(user);
-    res.render("view",{name:user.name});
+    res.render("view",{user:user});
     } catch (error) {
         console.log("error is ",error);
     }
@@ -395,8 +405,8 @@ const loadbookrentt = async(req,res)=>{
       res.status(200);
       const id = req.session.user_id;
       const user = await RejisterData.findOne({_id:id});
-      console.log(user);
-    res.render("bookrentt",{name:user.name});
+      // console.log(user);
+    res.render("bookrentt",{user:user});
     } catch (error) {
         console.log("error is ",error);
     }
@@ -434,6 +444,7 @@ module.exports = {
   loadnewbook,//faltu ka hai ise product route me already kiya tha
   loadbookrentt,
   upload,
+  upload3,
   showing,
   updateuser
 };

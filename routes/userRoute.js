@@ -55,6 +55,7 @@ user_route.get("/bookrentt",auth.islogin, userController.loadbookrentt);
 user_route.get("/view",auth.islogin,userController.loadview);
 
 user_route.get("/contact",auth.islogin,userController.loadContact);
+
 // for logut
 user_route.get("/logout",auth.islogin,userController.logout);
 
@@ -75,7 +76,7 @@ user_route.post("/rejister", userController.upload.single("image"), userControll
 user_route.post("/login", userController.verifylogin);
 
 user_route.post("/contact",auth.islogin,emailController.recieveMail);
-user_route.post("/updateuser",auth.islogin,userController.updateuser);
+user_route.post("/updateuser",auth.islogin, userController.upload.single("image"),userController.updateuser);
 
 
 
