@@ -70,7 +70,7 @@ user_route.get("/forget",auth.islogout, userController.forgetPassword);
 user_route.get("/resetpassword", userController.resetPassword);
 
 //for post routes
-user_route.post("/resetpassword",auth.islogout, userController.changePassword);
+user_route.post("/resetpassword", userController.changePassword);
 user_route.post("/forget", auth.islogout, userController.sendResetPasswordEmail);
 user_route.post("/rejister",auth.islogout, userController.upload.single("image"), userController.insertUser);
 
