@@ -4,13 +4,8 @@ body {
   font-family: "poppins", "sans-serif", "fantasy";  
   /* margin: auto 3%; */
   background-color: rgb(11, 8, 8);
+  
  
-}
-
-.{
-  height: 200px;
-
-  top: -1cm;
 }
 
 h1{
@@ -21,6 +16,11 @@ h1{
     font: 30px;
 
 }
+
+.homepage{
+  
+  overflow: hidden;
+}
 .newst{
 
 font-family: poppins;
@@ -30,7 +30,16 @@ font-size: 40px;
 font-weight: 1200;
 color: chartreuse;
 
+@media (max-width:800px) {
+  font-size: 2.5vh;
+  margin-top:20%;
+  margin-left: 1rem;
+  
 }
+
+}
+
+
 .newst1{
 
 
@@ -41,14 +50,34 @@ font-size: 200px;
 font-weight: 1200;
 color: rgba(255, 255, 255, 0.863);
 
+@media (max-width:800px) {
+  font-size: 13vh;
+  margin-top: -1rem ;
+}
 
 
+}
+
+.carouselImg{
+ object-fit:contain;
+ 
+ padding: 10% 5%;
+
+ @media (max-width:800px) {
+  height: 50vh;
+  width: 50vh;
+}
+}
+
+.threeImg{
+  height: 90vh;
+  /* padding: 10% 0; */
 }
 
 .block{
     margin-left: -5rem;
 }
-
+/* 
 .sizee{
     margin-top: 5rem;
     height: 100vh;
@@ -56,14 +85,22 @@ color: rgba(255, 255, 255, 0.863);
 
 
 
+} */
+.heading{
+padding: 0 6% 0 6%;
+height: 100%;
+width: 100%;
+
 }
-.sizeed{
-/* 
-text-align: center; */
 
+.buttons{
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+ 
 
 }
-
 
 .stpara{
 
@@ -96,6 +133,12 @@ margin-top: -2rem;
 font-size: 25px;
 color: rgba(255, 255, 255, 0.604);
 
+@media (max-width:800px) {
+  font-size: 2vh;
+}
+
+
+
 }
 
 .cnnn{
@@ -127,6 +170,15 @@ color: rgba(255, 255, 255, 0.604);
 
 margin-left: 10rem;
 margin-top: 3rem;
+
+@media (max-width:800px) {
+  font-size: 2vh;
+  margin-left: 0rem;
+margin-top: 2rem;
+}
+
+
+
 
 }
 .Rent{
