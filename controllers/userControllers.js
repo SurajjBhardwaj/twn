@@ -609,11 +609,23 @@ const  loadnewbook = async (req,res)=>{
      try {
       res.render("product");
      } catch (error) {
+        res.status(400);
       console.log("error here ",error);
      }
 
 
 }  
+
+const loadTeam = async (req, res) => {
+  try {
+    res.render("team")
+  } catch (error) {
+    console.log("error at team page ", error);
+    res.status(400);
+    res.send("error at laoding team page");
+
+  }
+}
 
 
 
@@ -632,7 +644,7 @@ module.exports = {
   loadContact,
   contactMail,
   loadview,
-  loadnewbook,//faltu ka hai ise product route me already kiya tha
+  loadnewbook, //faltu ka hai ise product route me already kiya tha
   loadbookrentt,
   upload,
   upload3,
@@ -641,5 +653,6 @@ module.exports = {
   forgetPassword,
   sendResetPasswordEmail,
   resetPassword,
-  changePassword
+  changePassword,
+  loadTeam
 };

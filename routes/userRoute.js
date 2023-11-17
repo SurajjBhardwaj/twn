@@ -80,6 +80,8 @@ user_route.post("/contact",auth.islogin,emailController.recieveMail);
 user_route.post("/updateuser",auth.islogin, userController.upload.single("image"),userController.updateuser);
 
 
+//for team page
+user_route.get("/team", auth.islogin, userController.loadTeam);
 
 
 
