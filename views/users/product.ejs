@@ -14,49 +14,81 @@
 
 body {
   font-family: Arial, sans-serif;
-  padding: 20px;
+  
   text-align: center;
     background-color: black;
 }
+.addbook{
+   height: 100vh;
+   width: 100vw;
+}
 
 form {
-  background-color: #fff;
+  background-color: #343A3F;
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 0 30px green;
+  /* box-shadow: 0 0 30px green; */
   margin: 0 auto;
   width: 500px;
+
+  @media(max-width: 800px){
+    width: 66%;
+    padding: 10px;
+    margin: 0 1.2rem;
+    background-color: transparent;
+  }
 }
 
 h1 {
   font-size: 36px;
   margin-bottom: 20px;
+
+  @media(max-width: 800px){
+    font-size: 2vh;
+    margin-bottom: 10px;
+  }
 }
 
 label {
   font-size: 18px;
   font-weight: bold;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
+  background-color: transparent;
+  @media(max-width: 800px){
+    font-size: 2vh;
+    margin-bottom: 1px;
+  }
 }
 input[type="text"], input[type="file"] {
   font-size: 18px;
   padding: 10px;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 6px;
   border: none;
-  border-bottom: 2px solid #ccc;
+  color: #28b485;
+  border-bottom: 2px solid #484b4a69;
    background-color: transparent;
+   @media(max-width: 800px){
+    font-size: 1.6vh;
+    margin-bottom: 2px;
+  }
 }
 
 input[type="text"]:focus, input[type="file"]:focus {
   outline: none;
-  border-bottom: 2px solid #4CAF50;
+  background-color: transparent;
+  border-bottom: 2px solid #30b88a69;
+}
+
+input[type="file"]{
+  background-color: transparent;
+  color: #3e8e41;
 }
 
 /* for placeholders */
 ::-webkit-input-placeholder {
-    color: #28b485;
+    color: #28b48569;
 }
 
 :-moz-placeholder {
@@ -82,17 +114,23 @@ input[type="text"]:focus, input[type="file"]:focus {
 } */
 
 button[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #28b485;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
   border: none;
+  @media(max-width: 800px){
+    font-size: 1.5vh;
+    padding: 5px 10px;
+    width: 100%;
+   
+  }
 }
 
 button[type="submit"]:hover {
-  background-color: #3e8e41;
+  background-color: #28b485;
 }
 
 
@@ -105,6 +143,10 @@ button[type="submit"]:hover {
   text-align: center;
   color: #28b485;
   margin-top: 10px;
+  @media(max-width: 800px){
+    font-size: 3vh;
+    margin-bottom: 10px;
+  }
   
 }
 
@@ -113,9 +155,9 @@ button[type="submit"]:hover {
 <body>
     
 
-<div style="margin-bottom: 5rem;"margin-top:5rem >
+<section class="addbook" >
 
-    <form action="/appendbook" method="post" enctype="multipart/form-data">
+    <form style="margin-top: 5%; " action="/appendbook" method="post" enctype="multipart/form-data">
         <h1 class="header">Add Books</h1><br>
         <div>
       
@@ -141,7 +183,7 @@ button[type="submit"]:hover {
           <input type="text" id="price" name="location" placeholder="Location">
       
           <br><br>
-          <input type="file" name="mainImage" id="image">
+          <input type="file" name="mainImage" id="image" class="bg-dark">
           <br><br>
       
           <button type="submit"> upload</button>
@@ -150,7 +192,7 @@ button[type="submit"]:hover {
       </form>
 
 
-</div>
+</section>
    
 </div>
 </form>
