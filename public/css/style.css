@@ -278,6 +278,49 @@ h1 {
   justify-content: space-between;
 }
 
+.container-fluid{
+  padding: 8% 0;
+  @media (max-width: 800px) {
+    padding: 5%;
+  }
+}
+
+#cardImg{
+height: 28vw;
+object-fit: cover;
+@media (max-width: 800px) {
+  height: 34vw;
+  object-fit: contain;
+}
+}
+
+#card{
+  @media (max-width: 800px) {
+   
+    margin-bottom: 1rem;
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.card-title{
+  @media (max-width: 800px) {
+    font-size: 2vh;
+  }
+  
+}
+#cardway{
+  display: flex;
+  @media (max-width: 800px) {
+    
+    display: flex;
+    flex-direction: column !important;
+  }
+}
+
+
 nav a {
   color: white;
   text-decoration: none;
@@ -482,3 +525,5 @@ p {
   margin-left: 39rem;
   text-align: center;
 }
+
+
