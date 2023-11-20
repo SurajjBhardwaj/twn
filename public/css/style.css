@@ -13,6 +13,30 @@ h1 {
   font: 30px;
 }
 
+.headingtwn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.twnofbookImg{
+  margin-top: 10rem;
+ width: 46vw;
+ margin-bottom: 1rem;
+ @media (max-width: 1000px) {
+  width: 80vw;
+ }
+
+ @media (max-width: 600px) {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  width: 44vh;
+  
+ }
+
+}
+
 .homepage {
   overflow: hidden;
 }
@@ -72,9 +96,10 @@ h1 {
 }
 
 .buttons {
+
   display: flex;
 
-  justify-content: center;
+  justify-content:flex-start;
   align-items: center;
 }
 
