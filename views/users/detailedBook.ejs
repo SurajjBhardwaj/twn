@@ -1,18 +1,34 @@
 <%- include('../layouts/header1.ejs') %>
 
-<h1>Product Details</h1>
-<% if (product) { %>
-  <div class="product">
-    <img src="<%= product.image %>" alt="<%= product.bookName %>">
-    <p>Name: <%= product.bookName %></p>
-    <p>Title: <%= product.tittle %></p>
-    <p>About: <%= product.about %></p>
-    <!-- Add more properties as needed -->
-  </div>
-<% } else { %>
-  <p>Product not found</p>
-<% } %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <!-- Add your stylesheets and other head elements here -->
+</head>
+<body>
+
+  <% if (data.user && data.product) { %>
+
+    <div class="product-details">
+      <h2>Product Details</h2>
+      <img src="<%= data.product.image %>" alt="<%= data.product.bookName %>">
+      <p>Name: <%= data.product.bookName %></p>
+      <p>Title: <%= data.product.tittle %></p>
+      <p>About: <%= data.product.about %></p>
+    </div>
+
+  <% } else { %>
+    <p>User or product not found</p>
+  <% } %>
 
 
-
+</body>
 <%- include('./footer.ejs') %>
+</html>
+
+
+

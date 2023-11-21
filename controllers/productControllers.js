@@ -125,11 +125,41 @@ const getProducts = async (req, res) => {
 };
 
 
+// productControllers.js
+
+const getProductDetails = async (req, res) => {
+  try {
+
+     const id = req.session.user_id;
+    data.user = await users.findOne({ _id: id });
+
+    if (data.user) {
+
+      const productId = req.params.productId; // Assuming you have a parameter for the product ID
+      data.product = await product.findOne({ _id: productId });
+
+      if (data.product) {
+        res.status(200).render("detailedBook", { data: data });
+      } else {
+        res.status(404).json({ error: "Product not found" });
+      }
+    } else {
+      res.status(400).send("user not found");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+
+
 
  
 module.exports = {
   insertProduct,
   appendProduct,
   upload,
-  getProducts
+  getProducts,
+  getProductDetails
 };
