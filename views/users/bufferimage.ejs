@@ -1,54 +1,253 @@
 <%- include('../layouts/header1.ejs') %>
-<br><br>
-<div style="display: flex; flex-direction:column;  height: 300px;padding: 30%;" >
-    <% if(typeof user.image.data!=='undefined') { %> 
-    <img style="width: 200px; height: 200px;" src="data:<%= user.image.contentType %>;base64, <%= user.image.data.toString('base64') %> " alt="image not found">
-    <% } else { %>
-        image not available
-        <% } %> 
-        <br>
-    <!-- <form action="/image" method="POST" >
-        <label for="name"> Name </label>
-        <input type="text" name="name" value="<%= user.name %>"><br>
-        <label for="mobileno">Mobile No: </label>
-        <input type="text" name="mobile" value="<%= user.mobile %>"><br>
-        <label for="email">email</label>
-        <input type="text" name="email" value="<%= user.email %>"><br>
-        <input type="button" value="submit" onclick="this.form.submit()">
-    </form>-->
 
-    <form style="align-items: left;text-align: left;" action="/updateuser" method="POST" enctype="multipart/form-data">
-        <label for="name">Name:</label>
-        <input type="text" name="newname" value="<%= user.name %>"><br>
-      
-        <label for="mobile">Mobile No:</label>
-        <input type="text" name="mobile" value="<%= user.mobile %>"><br>
-      
-        <label for="email">Email:</label>
-        <input type="text" name="newemail" value="<%= user.email %>"><br>
-        <% if(typeof user.image.data!=='undefined') { %> 
-            <label for="image">Update Profile pic</label>
-        <input type="file" name="image" placeholder="update profile pic" accept="image/*"> <br>
-            <% } else { %>
-                <label for="image">add Profile pic</label>
-                <input type="file" name="image" placeholder="add Profile pic" accept="image/*" >
-                <% } %> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+  
+    .profilepage {
+        background-color: black;
        
-      <br>
+       padding:10%  4vw;
+       padding-top: 4%;
+       padding-bottom: 12%;
+       grid-template-columns: repeat(auto-fit, minmax(25rem , 1fr));
       
-        <input type="submit" style="text-align: center;"  value="Submit">
+       grid-gap:8vw;
+
+       @media (max-width: 700px) {
+        display: block;
+       }
       
-    </form>
+    }
+
+    .list-item{
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: flex-start;
+     
+    }
+
+    svg{
+      margin-top: -1rem;
+      height: 2rem;
+      width: 2rem;
+    }
+
+    form {
+     
+      background-color: #343a3f;
+      padding: 40px;
+      border-radius: 10px;
       
+      margin: 0 auto;
+      width: 60%;
+
+      @media (max-width: 800px) {
+        width: 90%;
+        padding: 5%;
+        margin: 0 1.2rem;
+        background-color: #343a3f9b;
+      }
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+
+      @media (max-width: 800px) {
+        font-size: 2vh;
+        margin-bottom: 10px;
+      }
+    }
+
+    label {
+      text-align: left;
+      font-size: 18px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 2px;
+      color: #28b485b3;
+      background-color: transparent;
+      @media (max-width: 800px) {
+        font-size: 2vh;
+        margin-bottom: 1px;
+      }
+    }
+    input[type="text"]{
+      font-size: 18px;
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 6px;
+      border: none;
+      color: #3e7b67;
+      border-bottom: 2px solid #484b4a69;
+      background-color: transparent;
+      @media (max-width: 800px) {
+        font-size: 1.6vh;
+        margin-bottom: 2px;
+      }
+    }
+
+    input[type="text"]:focus
+     {
+      outline: none;
+      background-color: transparent;
+      border-bottom: 2px solid #30b88a69;
+    }
+
+  
+
+    /* for placeholders */
+    ::-webkit-input-placeholder {
+      color: #28b48569;
+    }
+
+    :-moz-placeholder {
+      color: #28b485;
+    }
+
+    ::-moz-placeholder {
+      color: #28b485;
+    }
+
+    :-ms-input-placeholder {
+      color: #28b485;
+    }
+
+    .button {
+      background-color: #28b485;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      border: none;
+      width: 100%;
+      @media (max-width: 800px) {
+        font-size: 1.5vh;
+        padding: 5px 10px;
+        width: 100%;
+      }
+    }
+
+    button:hover {
+      background-color: #28b485;
+    }
+
+    .header {
+      font-size: 60px;
+      font-weight: bold;
+      font-family:'Times New Roman', Times, serif;
+      text-align: center;
+      color: #28b485;
+      margin-bottom:1.5rem;
+      @media (max-width: 800px) {
+        font-size: 5vh;
+        margin-bottom: 10px;
+      }
+    }
+
+    .text {
+      font-size: 20px;
+      font-weight: light;
+      font-family: poppins;
+      color: #ffffff98;
+      text-align: left;
+     
+    }
+
+    .desc{
+      padding: 2% 5%;
+    }
+
+    .profileImg{
+        height: 13vw;
+        width: 13vw;
+        margin-bottom: 4rem;
+        overflow: hidden;
+        border-radius: 50%; 
+
+        @media(max-width: 800px){
+            height: 20vh;
+        width: 20vh;
+        }
+
+    }
+
+    img{
+       
+        width: 100%;
+        object-fit: cover;
+    }
+
+    
+  </style>
+  <body>
+    <section>
+       
+     <div class="profilepage">
+        <h2 class="header">Your Profile</h2>
+
+        
+
+        <form style="align-items: left;text-align: left;" action="/updateuser" method="POST" enctype="multipart/form-data">
+            <div class="profileImg">
+                <% if(typeof user.image.data!=='undefined') { %> 
+                    <img  src="data:<%= user.image.contentType %>;base64, <%= user.image.data.toString('base64') %> " alt="image not found">
+                    <% } else { %>
+                        image not available
+                        <% } %> 
+            </div>
+            <div class="list-item">
+               
+                <label for="name">Name:</label>
+                <input type="text" name="newname" value="<%= user.name %>">
+              
+            </div>
+
+            <div class="list-item">
+
+                <label for="mobile">Mobile No:</label>
+                <input type="text" name="mobile" value="<%= user.mobile %>">
+            </div>
+            <div class="list-item">
+
+            <label for="email">Email:</label>
+            <input type="text" name="newemail" value="<%= user.email %>">
+            </div>
+
+            <div class="list-item" style="margin-bottom: 2rem;">
+            <% if(typeof user.image.data!=='undefined') { %> 
+                <label for="image">Update Profile pic</label>
+            <input type="file" name="image" placeholder="update profile pic" accept="image/*"> <br>
+                <% } else { %>
+                    <label for="image">add Profile pic</label>
+                    <input type="file" name="image" placeholder="add Profile pic" accept="image/*" >
+                    <% } %> 
+           
+          <br>
+        </div>
+            <input class="button" type="submit" style="text-align: center;"  value="Submit">
+          
+        </form>
+      
+       
+     </div>
+    </section>
    
-</div>
+  </body>
+</html>
 
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
-<br><br><br><br>
 
-<div style="background-color: rgb(126, 106, 106);">
-<%- include('footer') -%>
-</div>
+<div style="color:black">
+    <%- include('footer') -%>
+    </div>
+
