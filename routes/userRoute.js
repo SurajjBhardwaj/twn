@@ -76,7 +76,7 @@ user_route.post("/rejister",auth.islogout, userController.upload.single("image")
 
 user_route.post("/login", userController.verifylogin);
 
-user_route.post("/contact",auth.islogin,emailController.recieveMail);
+user_route.post("/contact",emailController.recieveMail);
 user_route.post("/updateuser",auth.islogin, userController.upload.single("image"),userController.updateuser);
 
 
