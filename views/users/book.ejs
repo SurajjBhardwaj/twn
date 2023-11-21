@@ -16,7 +16,12 @@
     <% data.product.forEach(product => { %>
       <div class="product">
         <a href="/product/<%= product._id %>">click me</a>
-        <img src="<%= product.image %>" alt="<%= product.bookName %>">
+
+         <% if(typeof product.image.data!=='undefined') { %> 
+                    <img style="width: 500px; height: auto;"  src="data:<%= product.image.contentType %>;base64, <%= product.image.data.toString('base64') %> " alt="<%= product.bookName %>">
+                    <% } %> 
+
+        <!-- <img src="<%= product.image %>" alt="<%= product.bookName %>"> -->
         <p>Name: <%= product.bookName %></p>
         <p>Title: <%= product.tittle %></p>
         <p>About: <%= product.about %></p>
