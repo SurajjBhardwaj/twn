@@ -618,10 +618,24 @@ const  loadnewbook = async (req,res)=>{
 
 const loadTeam = async (req, res) => {
   try {
-   const id = req.session.user_id;
-   const user = await RejisterData.findOne({ _id: id });
-  
-   res.render("team", { user: user });
+
+
+    console.log(req.session.id);
+   
+      const id = req.session.user_id;
+      const user = await RejisterData.findOne({ _id: id });
+    
+    
+    if (user) {
+      console.log(`it ss working ${user}`);
+      res.render("team", { user: user });
+    }
+
+    else {
+      console.log("it is not working");
+      res.render("team");
+      
+    }
   } catch (error) {
     console.log("error at team page ", error);
     res.status(400);
