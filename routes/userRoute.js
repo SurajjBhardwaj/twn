@@ -54,7 +54,7 @@ user_route.get("/home",auth.islogin , userController.loadhome);
 user_route.get("/bookrentt",auth.islogin, userController.loadbookrentt);
 user_route.get("/view",auth.islogin,userController.loadview);
 
-user_route.get("/contact",auth.islogin,userController.loadContact);
+user_route.get("/contact",userController.loadContact);
 
 // for logut
 user_route.get("/logout",auth.islogin,userController.logout);

@@ -569,8 +569,14 @@ const loadContact = async(req,res)=>{
     try {
       res.status(200);
       const id = req.session.user_id;
-      const user = await RejisterData.findOne({_id:id});
-      res.render("contact",{user:user});
+      const user = await RejisterData.findOne({ _id: id });
+      
+      if (user) {
+        res.render("contact",{user:user});
+      }
+      else {
+        res.render("contact");
+      }
     } catch (error) {
         console.log("error is ",error);
     }
