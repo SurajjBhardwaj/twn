@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer")
 // multer
 const multer = require("multer");
 const path = require("path");
+const { log } = require("console");
 
 
 
@@ -101,9 +102,34 @@ const insertProduct = async (req,res)=>{
 
 }
 
+const data = {
+  user: null,
+  product: null,
+};
+const getProducts = async (req, res) => {
+  try {
+    const id = req.session.user_id;
+    data.user = await users.findOne({ _id: id });
+
+    if (data.user) {
+      data.product = await product.find({}); // Convert cursor to array
+      console.log(data);
+      res.status(200).render("book", { data: data });
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+
+
  
-module.exports ={
-    insertProduct,
-    appendProduct,
-    upload
-}
+module.exports = {
+  insertProduct,
+  appendProduct,
+  upload,
+  getProducts
+};

@@ -25,6 +25,7 @@ product_route.use(session({
  product_route.set("view engine", "ejs");
  product_route.set("views", "./views/users");
 
+product_route.get("/products", auth.islogin, ProductController.getProducts);
 
  product_route.get("/appendbook",auth.islogin,ProductController.appendProduct);
 //  product_route.get("/appendbook",auth.islogout,userController.login);

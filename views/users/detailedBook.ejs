@@ -1,0 +1,18 @@
+<%- include('../layouts/header1.ejs') %>
+
+<h1>Product Details</h1>
+<% if (product) { %>
+  <div class="product">
+    <img src="<%= product.image %>" alt="<%= product.bookName %>">
+    <p>Name: <%= product.bookName %></p>
+    <p>Title: <%= product.tittle %></p>
+    <p>About: <%= product.about %></p>
+    <!-- Add more properties as needed -->
+  </div>
+<% } else { %>
+  <p>Product not found</p>
+<% } %>
+
+
+
+<%- include('./footer.ejs') %>
