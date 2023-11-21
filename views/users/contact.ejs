@@ -1,4 +1,10 @@
-<%- include('../layouts/header1.ejs') %>
+<% if (typeof user !== 'undefined') { %>
+    <%- include('../layouts/header1.ejs') %>
+<% } else { %>
+    <%- include('../layouts/header.ejs') %>
+<% } %>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
