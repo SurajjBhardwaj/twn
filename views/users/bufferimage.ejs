@@ -13,7 +13,7 @@
   </head>
 
   <style>
-  
+
     .profilepage {
         background-color: black;
        
@@ -248,12 +248,15 @@
        
      </div>
     </section>
-   
+ 
   </body>
+  
 </html>
+ 
+<script>
+    let s = document.getElementById("loader");
+    window.addEventListener("load", () => {
 
-
-<div style="color:black">
-    <%- include('footer') -%>
-    </div>
-
+        s.style.display = "none";
+    })
+</script>
