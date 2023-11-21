@@ -81,7 +81,7 @@ user_route.post("/updateuser",auth.islogin, userController.upload.single("image"
 
 
 //for team page
-user_route.get("/team", auth.islogin, userController.loadTeam);
+user_route.get("/team",userController.loadTeam);
 
 
 
