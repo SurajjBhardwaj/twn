@@ -17,6 +17,22 @@ pass : your smtp password of your email
 
 -----
 
+```
+.env file sample
+
+PORT = 5000
+URI=<Mongo URL>
+Secret = "1234suraj"
+pass=<smtp password>
+CLOUDINARY_URL=<>
+CLOUDINARY_KEY=
+cloud_name=
+secret=<Cloudinary secret>
+
+```
+
+
+
 ## Set-Up for this project
 
 step 1 : fork the repo and then clon in your local machine using the code
@@ -65,6 +81,11 @@ This project will run at``` https://localhost:${process.env.port}```
 --------------------------------------
 
 # Work flow will be updated very soon.
+* User can access everything, if he is logined
+* Use can access, contact forma the login, signup page and team page only
+* after login, he can access the whole project and also he can rent the book and add their book on rent.
+
+
 
 
 
