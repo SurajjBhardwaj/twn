@@ -80,7 +80,7 @@ This project will run at``` https://localhost:${process.env.port}```
 
 --------------------------------------
 
-# Work flow will be updated very soon.
+# Work flow 
 * User can access everything, if he is logined
 * Use can access, contact forma the login, signup page and team page only
 * after login, he can access the whole project and also he can rent the book and add their book on rent.
